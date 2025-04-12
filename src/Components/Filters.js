@@ -1,9 +1,7 @@
-// src/components/Filters.js
 import React from 'react';
 import {
     Box,
     FormControl,
-    InputLabel,
     Select,
     MenuItem,
     Button
@@ -11,8 +9,8 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 
 function Filters({
-    departments, // Ya vienen filtrados por activos desde App.js
-    positions,   // Ya vienen filtrados por activos desde App.js
+    departments,
+    positions,
     selectedDepartment,
     selectedPosition,
     onDepartmentChange,
@@ -25,30 +23,24 @@ function Filters({
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                flexWrap: 'wrap', // Para responsividad
-                gap: 2, // Espacio entre elementos
-                mb: 3, // Margen inferior
-                p: 2, // Padding
-                // backgroundColor: 'background.paper', // Fondo opcional
-                // borderRadius: 1 // Bordes redondeados opcionales
+                flexWrap: 'wrap',
+                gap: 2,
+                mb: 3,
             }}
         >
             <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-                {/* Select de Departamento */}
                 <FormControl sx={{ minWidth: 200 }}>
-                    <InputLabel id="department-select-label">Departamento</InputLabel>
                     <Select
-                        labelId="department-select-label"
                         id="department-select"
                         value={selectedDepartment}
-                        label="Departamento"
                         onChange={(e) => onDepartmentChange(e.target.value)}
+                        displayEmpty
+                        inputProps={{ 'aria-label': 'Seleccione un Departamento' }}
                     >
-                        <MenuItem value="">
+                        <MenuItem value="" disabled>
                             <em>Seleccione un Departamento</em>
                         </MenuItem>
                         {departments.map((dept) => (
-                            // Usamos el ID (Guid) como value
                             <MenuItem key={dept.id} value={dept.id}>
                                 {dept.nombre}
                             </MenuItem>
@@ -56,21 +48,18 @@ function Filters({
                     </Select>
                 </FormControl>
 
-                {/* Select de Cargo */}
                 <FormControl sx={{ minWidth: 200 }}>
-                    <InputLabel id="position-select-label">Cargo</InputLabel>
                     <Select
-                        labelId="position-select-label"
                         id="position-select"
                         value={selectedPosition}
-                        label="Cargo"
                         onChange={(e) => onPositionChange(e.target.value)}
+                        displayEmpty
+                        inputProps={{ 'aria-label': 'Seleccione un Cargo' }}
                     >
-                        <MenuItem value="">
-                            <em>Seleccione un Cargo</em>
+                        <MenuItem value="" disabled>
+                             <em>Seleccione un Cargo</em>
                         </MenuItem>
                         {positions.map((pos) => (
-                             // Usamos el ID (Guid) como value
                             <MenuItem key={pos.id} value={pos.id}>
                                 {pos.nombre}
                             </MenuItem>
@@ -79,10 +68,9 @@ function Filters({
                 </FormControl>
             </Box>
 
-            {/* Botón Crear */}
             <Button
                 variant="contained"
-                color="primary" // O "success" si prefieres verde
+                color="primary"
                 startIcon={<AddIcon />}
                 onClick={onCreateNew}
             >
